@@ -1,0 +1,42 @@
+body {
+	font-family: "Trebuchet MS", "Helvetica", "Arial",  "Verdana", "sans-serif";
+	font-size: 62.5%;
+}
+<!--
+	UL	{margin-top: 0pt}
+	a:hover {color: #0099FF}
+	.blacklink	{color: blue}
+	FONT.noul A {text-decoration:none;color:blue}
+-->
+div.float {
+	float: left;
+}
+
+div.float p {
+	text-align: center;
+}
+
+.tk-museo {
+	font-family: 'Lobster', arial, serif;
+	[if ! IE]font-weight: 300; 
+	[if ! IE] font-size: x-large;
+	[if IE] font-size: large;
+}
+
+td.tk-cody {
+	font-family: 'Droid Sans Mono', arial, serif;
+	[if IE] font-size: x-small;
+	[if ! IE] font-size: small;
+}
+
+.matty {
+	font-family: 'Josefin Sans Std Light', arial, serif; 
+	[if ! IE] font-size: x-large;
+	[if IE] font-size: large;
+}
+
+.listing{
+	font-family: 'Droid Sans Mono', arial, serif;
+	[if IE] font-size: x-small;
+	[if ! IE] font-size: small;
+}
