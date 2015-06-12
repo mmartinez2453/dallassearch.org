@@ -72,7 +72,8 @@
 				tigra_tables('vendDet', 0, 0, '#ffffff', '#BFD9D3', '#ffcc66', 'yellow'); 
 			// -->
 			</script>
-			</font>        <center><font face=\"arial\" size=\"1\"><a href=\"javascript:window.close()\" onmouseover=\"window.status='';return true\" onmouseout=\"window.status='';return true\">Close Window</a></font></center>";
+			</font>
+			<!--<center><font face=\"arial\" size=\"1\"><a href=\"javascript:window.close()\" onmouseover=\"window.status='';return true\" onmouseout=\"window.status='';return true\">Close Window</a></font></center>-->";
 
 	$page = implode("", $page);
 	echo $header.$page;

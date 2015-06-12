@@ -3,7 +3,7 @@ require_once ('/homepages/9/d91581201/htdocs/common.inc');
 
 function buildWEOptions() {
 
-    $thisReturn = '<select tabindex="1" name="weo" id="weo"><option value="">---</option>';
+    $thisReturn = '<select tabindex="1" name="weo" id="weo">';
 
     $query      = 'SELECT * FROM we_details order by we_no';
     $results    = doQuery($query);
@@ -20,7 +20,7 @@ function buildWEOptions() {
 function buildWEList() {
 
     $thisReturn  = '<table border="0" cellspacing="3" cellpadding="2" name="wel" id="wel" class="listing">';
-    $thisReturn .= '<tr><td colspan="5" align="center">The list of SEARCH Weekends</td></tr>';
+    $thisReturn .= '<tr><td colspan="5" align="center">SEARCH Weekends Dallas, Texas</td></tr>';
     $thisReturn .= '<tr><td align="center">W/E #</td><td>Theme Song</td><td align="center">From</td><td align="center">To</td><td align="center">Location</td></tr>';
 
     $query      = 'SELECT * FROM we_details order by we_no';
