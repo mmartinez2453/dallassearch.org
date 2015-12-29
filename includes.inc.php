@@ -29,7 +29,8 @@ function buildWEList() {
     while ($thisLine = mysql_fetch_array($results))
     {
         $thisReturn .= "<tr>";
-        $thisReturn .= '<td align="center"><a CLASS="noul" href="" onClick=\'submitQuery('.$thisLine['we_no'].'); return false\' onMouseOver="window.status = \'Go to the previous weekend\'; return true">'.$thisLine['we_no'].'</a></td><td>'.$thisLine['themesong'].'&nbsp;</td><td align="center">'.$thisLine['start_date'].'&nbsp;</td><td align="center">'.$thisLine['end_date'].'&nbsp;</td><td>'.$thisLine['location'].'&nbsp;</td>';
+        // $thisReturn .= '<td align="center"><a CLASS="noul" href="" onClick=\'submitQuery('.$thisLine['we_no'].'); return false\' onMouseOver="window.status = \'Go to the previous weekend\'; return true">'.$thisLine['we_no'].'</a></td><td>'.$thisLine['themesong'].'&nbsp;</td><td align="center">'.$thisLine['start_date'].'&nbsp;</td><td align="center">'.$thisLine['end_date'].'&nbsp;</td><td>'.$thisLine['location'].'&nbsp;</td>';
+        $thisReturn .= '<td align="center">'.$thisLine['we_no'].'</td><td>'.$thisLine['themesong'].'&nbsp;</td><td align="center">'.$thisLine['start_date'].'&nbsp;</td><td align="center">'.$thisLine['end_date'].'&nbsp;</td><td>'.$thisLine['location'].'&nbsp;</td>';
         $thisReturn .= "</tr>";
     }
     $thisReturn .= '</table>';

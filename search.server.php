@@ -58,6 +58,11 @@ function searchQuery($aFormValues, $weOverride){
 					</tr>
 				</table>
 				</td>";
+                
+                $objResponse->script('$( "#tabs" ).tabs( "option", "disabled", [ 2,3,4,5 ] )');
+                $tabsW = "No information was found for this weekend";
+                $weName = "Weekend #".$weSubmit;
+                
 	} else {
 		while ($staff = mysql_fetch_array($groups)) {
 			$tsql = "select * from v_we_all_details where we_no = '".$weSubmit."' and rid = '".$staff['rid']."' ORDER BY rid, last_name, first_name";
@@ -74,7 +79,7 @@ function searchQuery($aFormValues, $weOverride){
 				while ($row = mysql_fetch_array($stmt)) {
                     // Set up substitutions
 					if (!is_null($row['wikipedia'])) {
-						$wikilink = "<br><font CLASS='noul' size='2'><a class='various fancybox.iframe' href='".$row['wikipedia']."' target='_blank'>".$row['themesong']." on wikipedia.org</a></font>";
+						$wikilink = "<br><font CLASS='noul' size='2'><a class='fancybox-media fancybox.iframe' href='".$row['wikipedia']."' target='_blank'>".$row['themesong']." on wikipedia.org</a></font>";
 					} else {
 						$wikilink = "";
 					}
@@ -82,8 +87,14 @@ function searchQuery($aFormValues, $weOverride){
 					if ($row['themesong'] == '' || $row['themesong'] == 'NO THEME SONG' || is_null($row['songfactsID'])) {
 						$songlink = $row['themesong']." - ".$row['song_artist'].$wikilink;
 					} else {
-						$songlink = "<font CLASS='noul'><a class='various fancybox.iframe' href='http://www.songfacts.com/detail.php?id=".$row['songfactsID']."' target='_blank'>".$row['themesong']." - ".$row['song_artist']."</a>$wikilink</font>";
+						$songlink = "<font CLASS='noul'><a class='fancybox-media fancybox.iframe' href='http://www.songfacts.com/detail.php?id=".$row['songfactsID']."' target='_blank'>".$row['themesong']." - ".$row['song_artist']."</a>$wikilink</font>";
 						//$songlink = $row['themesong'];
+					}
+					
+					if ($row['youtube']) {
+						$youtube = '<iframe id="player2" width="420" height="315" src="https://www.youtube.com/embed/'.$row['youtube'].'?enablejsapi=1&origin=http://dallassearch.org" frameborder="0" allowfullscreen></iframe>';
+					} else {
+						$youtube = "";
 					}
 					
                     if ($row['start_date'] == "") {
@@ -95,9 +106,9 @@ function searchQuery($aFormValues, $weOverride){
                     $pageHeader2 = "<table width='100%'><tr><td align='left'>$prevWELink</td><td class='tk-museo' align='center'>Weekend #".$row['we_no']." - ".$weDates."<br>".$songlink."<br><font size='3'>".$row['location']."</font></td><td align='right'>$nextWELink</td></tr></table>";
 					
 					if ($row['searchers_pic']) {
-						$tabsW = "Weekend #".$row['we_no']." <br /> ".$weDates."<br>".$songlink."<br><font size='3'>".$row['location']."<br><img src='".$row['searchers_pic']."' border='0' style='max-width: 80%; height: auto;' />";
+						$tabsW = "Weekend #".$row['we_no']." <br /> ".$weDates."<br>".$songlink."<br><font size='3'>".$row['location']."<br><img src='".$row['searchers_pic']."' border='0' style='max-width: 80%; height: auto;' /><br />$youtube";
 					} else {
-						$tabsW = "Weekend #".$row['we_no']." <br /> ".$weDates."<br>".$songlink."<br><font size='3'>".$row['location'];
+						$tabsW = "Weekend #".$row['we_no']." <br /> ".$weDates."<br>".$songlink."<br><font size='3'>".$row['location']."<br />".$youtube;
 					}
 					
 					$weName = "Weekend #".$row['we_no'];
@@ -191,12 +202,13 @@ function searchQuery($aFormValues, $weOverride){
 	$objResponse->assign("prevWELink", "innerHTML", $prevWELink);
 	$objResponse->assign("nextWELink", "innerHTML", $nextWELink);
 	$objResponse->assign("weName", "innerHTML", $weName);
-	$objResponse->script( '$( "#tabs" ).tabs( "option", "active", 0 );' );
 	
-	if ($tabsDiv4 == '') {
-		$objResponse->script('$( "#tabs" ).tabs( "option", "disabled", [ 4 ] )');
-	} else {
-		$objResponse->script('$( "#tabs" ).tabs( "option", "disabled", [  ] )');
+	if ($tabsW == "No information was found for this weekend") {
+            $objResponse->script('$( "#tabs" ).tabs( "option", "disabled", [ 2,3,4,5 ] )');
+	} elseif ($tabsDiv4 == '') {
+            $objResponse->script('$( "#tabs" ).tabs( "option", "disabled", [ 5 ] )');
+        } else {
+            $objResponse->script('$( "#tabs" ).tabs( "option", "disabled", [  ] )');
 	}
 	
 	$objResponse->assign("weo", "value", $weSubmit);
@@ -206,6 +218,8 @@ function searchQuery($aFormValues, $weOverride){
 	}
 	
 	$objResponse->assign("submitButton","disabled",false);
+	$objResponse->call("onYouTubeIframeAPIReady()");
+	$objResponse->script( '$( "#tabs" ).tabs( "option", "active", 1 );' );
 	
 	return $objResponse;
 }

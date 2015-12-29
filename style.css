@@ -23,10 +23,11 @@ div.float p {
 	[if IE] font-size: large;
 }
 
-td.tk-cody {
-	font-family: 'Droid Sans Mono', arial, serif;
-	[if IE] font-size: x-small;
-	[if ! IE] font-size: small;
+.tk-cody {
+	font-family: 'Merriweather', serif;
+	font-size: 16px;
+	/*[if IE] font-size: large;
+	[if ! IE] font-size: large;*/
 }
 
 .matty {
@@ -39,4 +40,21 @@ td.tk-cody {
 	font-family: 'Droid Sans Mono', arial, serif;
 	[if IE] font-size: x-small;
 	[if ! IE] font-size: small;
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 25px;
+    padding-top: 25px;
+    height: 0;
+    /*overflow: hidden;*/
+	float: right;
+}
+
+.video-container iframe {
+    position: absolute;
+    top:0;
+    left: 0;
+/*    width: 640px;
+    height: 480px;*/
 }
